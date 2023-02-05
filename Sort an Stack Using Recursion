@@ -1,0 +1,41 @@
+#include <iostream>
+#include<stack>
+using namespace std;
+
+void insert(stack<int>&st,int temp){ //Insert the temp at right position
+    if(st.size() == 0 || st.top() <= temp){ //Check if size of stack is 0 or last element is less than temp
+        st.push(temp);                      //then insert in stack
+        return;
+    }
+    int x = st.top(); //else pop out last element recursively
+    st.pop();
+    insert(st,temp);
+    st.push(x);
+}
+ 
+void sort(stack<int>&st){  //Sort the stack
+    if(st.size() <= 1)
+    return;
+    int temp = st.top();
+    st.pop();
+    sort(st);
+    insert(st,temp);
+}
+
+
+int main()
+{
+    stack<int>st;
+    int n; cin>>n; int a;
+    for(int i=0; i<n; i++){ //Taking input in stack
+        cin>>a;
+        st.push(a);
+    }
+    sort(st); //Calling the sort function to sort the stack
+    while(!st.empty()){
+        cout<<st.top();
+        st.pop();
+    }
+
+    return 0;
+}
