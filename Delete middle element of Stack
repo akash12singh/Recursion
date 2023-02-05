@@ -1,0 +1,42 @@
+#include <iostream>
+#include<stack>
+using namespace std;
+
+// void insert(stack<int>&st,int temp){ //Insert the temp at right position
+//     st.push(temp);
+// }
+ 
+void deleteMiddleElement(stack<int>&st,int k){  
+    if(st.size() == 0)
+    return ;
+    if(k == st.size()){ // if size == k it delete the middle element and return 
+        st.pop();
+    return;
+    }
+    
+    int temp = st.top();
+    st.pop();
+    deleteMiddleElement(st,k);
+    st.push(temp);  //push the vlaues which are poped before the middle element 
+    //insert(st,temp);
+    
+}
+
+
+int main()
+{
+    stack<int>st;
+    int n; cin>>n; int a;
+    for(int i=0; i<n; i++){ //Taking input in stack
+        cin>>a;
+        st.push(a);
+    }
+    int k = n/2 + 1;
+    deleteMiddleElement(st,k); //Calling the sort function to sort the stack
+    while(!st.empty()){
+        cout<<st.top()<<" ";
+        st.pop();
+    }
+
+    return 0;
+}
