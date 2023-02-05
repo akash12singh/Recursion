@@ -1,0 +1,60 @@
+
+#include <iostream>
+#include<vector>
+using namespace std;
+
+void insert(vector<int>&v,int temp){
+    /*vector<int>::iterator it; //Iteratively
+
+    for (it = v.begin(); it < v.end(); it++)
+    {
+        if (temp < *it)
+        {
+            v.insert(it, temp);
+            return;
+        }
+    }
+
+    v.push_back(temp);
+    return ;*/
+    
+   if(v.size()==0 || v[v.size()-1]<=temp) // Recursively
+   {
+   v.push_back(temp);
+   return;
+   }
+   int x=v[v.size()-1];
+   v.pop_back();
+   insert(v,temp);
+   v.push_back(x);
+   
+
+}
+
+
+void sort(vector<int>&v){
+    //Base Condition
+    if(v.size() <= 1)
+    return;
+    int temp = v[v.size() - 1];
+    v.pop_back();
+    sort(v);
+    insert(v,temp);
+    
+}
+
+int main()
+{
+    int n,a; cin>>n;
+    vector<int>v ;
+    for(int i=0; i<n; i++){
+        cin>>a;
+        v.push_back(a);
+    }
+    sort(v);
+    for(auto i:v)
+        cout<<i<<" ";
+    
+
+    return 0;
+}
