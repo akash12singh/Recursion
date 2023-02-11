@@ -1,0 +1,53 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+#include <bits/stdc++.h>
+
+#include <iostream>
+#include<vector>
+#include<unordered_map>
+using namespace std;
+
+vector<string>v;
+
+
+void subset(string s, string op){
+    
+    if(s.size() == 0){
+      v.push_back(op);
+        return;
+    }
+    string op1 = op + '_'+s[0];
+    string op2 = op + s[0];
+    
+    // op1.push_back('_');
+    // op1.push_back(s[0]);
+    // op2.push_back(s[0]);
+    s.erase(s.begin()+0);
+    subset(s,op1);
+    subset(s,op2);
+    
+    return ;
+    
+}
+
+
+
+
+int main()
+{
+    string s; cin>>s;
+    string op ;
+    op = s[0];
+    s.erase(s.begin()+0);
+
+     subset(s,op);
+    sort(v.begin(),v.end());
+    for(int i=0; i<v.size(); i++)
+    cout<<i<<": "<<v[i]<<endl;
+    return 0;
+}
