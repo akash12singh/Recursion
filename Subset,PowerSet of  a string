@@ -1,0 +1,45 @@
+#include <iostream>
+#include<vector>
+#include<unordered_map>
+using namespace std;
+
+vector<string>v;
+unordered_map<string,int>mp;
+
+bool checkExist(string op){
+    if (mp.find(op) != mp.end())
+    return false;
+    else return true;
+    
+}
+
+void subset(string s, string op){
+    
+    if(s.size() == 0){
+      if(checkExist(op)){ // this if is used to insert insert only unique elements in vector
+          mp[op]++;       // checkExist is function which returns true or false on basis of if element present or not
+          v.push_back(op);
+      }
+    //   v.push_back(op);   //this can be used if unqiue conditions is not constraint by doing comment on above if
+        return;
+    }
+    string op1 = op;
+    string op2 = op;
+    op2.push_back(s[0]);
+    s.erase(s.begin()+0);
+    subset(s,op1);
+    subset(s,op2);
+    
+    //return ;
+    
+}
+
+int main()
+{
+    string s; cin>>s;
+    string op = "";
+     subset(s,op);
+    for(int i=0; i<v.size(); i++)
+    cout<<i<<" "<<v[i]<<endl;
+    return 0;
+}
