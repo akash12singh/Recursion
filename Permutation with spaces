@@ -21,11 +21,11 @@ void subset(string s, string op){
       v.push_back(op);
         return;
     }
-    string op1 = op + '_'+s[0];
-    string op2 = op + s[0];
+    string op1 = op + ' '+s[0]; //here op1 is A + ' ' + B
+    string op2 = op + s[0];  // and op2 is A+B
     
-    // op1.push_back('_');
-    // op1.push_back(s[0]);
+    // op1.push_back(' ');
+    // op1.push_back(s[0]); 
     // op2.push_back(s[0]);
     s.erase(s.begin()+0);
     subset(s,op1);
@@ -42,8 +42,8 @@ int main()
 {
     string s; cin>>s;
     string op ;
-    op = s[0];
-    s.erase(s.begin()+0);
+    op = s[0]; //here i'm updating op with first character because take example "ABC", the possible outputs are : "A B C", "ABC", "A BC", "AB C"
+    s.erase(s.begin()+0); //and deleting first character so it starts from second
 
      subset(s,op);
     sort(v.begin(),v.end());
